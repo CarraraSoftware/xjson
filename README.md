@@ -2,15 +2,18 @@
 Define your structure with the XNAME and XFIELDS macros.
 Additionally, you can use the XINT and XSTR helpers to define the individual fields.
 ```C
+#define XJSON_IMPLEMENTATION
+#include "xjson.h"
+
 #define XNAME MyStruct
 #define XFIELDS \
     XINT(int_field, "int_field") \
     XSTR(str_field, "str_field") \
-#include "xjson.h"
+#include "xgen.h"
 ```
 
-The first time you include 'xjson.h', all the helper function will be included,
-but also the struct and all the functions necessary for using the just defined fields.
+When you include 'xgen.h', it will generate the struct and functions 
+necessary for using the just defined fields.
 That is, you will access to the struct:
 ```C
 typedef struct {
@@ -23,6 +26,7 @@ and the functions:
 MyStruct X_json_default_struct_MyStruct();
 void     X_json_parse_MyStruct(const char* tokens[], size_t tokens_size, MyStruct* j);
 void     X_json_print_MyStruct(MyStruct* j);
+void     X_json_struct_free_MyStruct(MyStruct* j);
 ```
 
 
@@ -33,7 +37,7 @@ you can just repeat the previous steps:
 #define XFIELDS \
     XINT(another_int_field, "another_int_field") \
     XSTR(another_str_field, "another_str_field") \
-#include "xjson.h"
+#include "xgen.h"
 ```
 Which in turn will give the struct:
 ```C
@@ -47,10 +51,8 @@ and the functions:
 AnotherStruct X_json_default_struct_AnotherStruct();
 void          X_json_parse_AnotherStruct(const char* tokens[], size_t tokens_size, AnotherStruct* j);
 void          X_json_print_AnotherStruct(AnotherStruct* j);
+void          X_json_struct_free_AnotherStruct(AnotherStruct* j);
 ```
 
-
-Note that the '#include "xjson.h"' for the second struct,
-does not include all the helper functions again.
 
 See example.c for a more complete usage of the lib.
