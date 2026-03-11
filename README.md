@@ -8,7 +8,7 @@ Additionally, you can use the XINT and XSTR helpers to define the individual fie
 #define XNAME MyStruct
 #define XFIELDS \
     XINT(int_field, "int_field") \
-    XSTR(str_field, "str_field") \
+    XSTR(str_field, "str_field")
 #include "xgen.h"
 ```
 
@@ -36,7 +36,7 @@ you can just repeat the previous steps:
 #define XNAME AnotherStruct
 #define XFIELDS \
     XINT(another_int_field, "another_int_field") \
-    XSTR(another_str_field, "another_str_field") \
+    XSTR(another_str_field, "another_str_field")
 #include "xgen.h"
 ```
 Which in turn will give the struct:
